@@ -138,9 +138,9 @@ const Music = () => {
             </div>
           ))}
         </div>
-        <div className="background-two">
+        {/* <div className="background-two">
           {printSpan()}
-        </div>
+        </div> */}
       </div>
     </div>
   );
