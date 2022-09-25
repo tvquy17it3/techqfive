@@ -1,0 +1,45 @@
+@import './color.scss';
+
+.Menu {
+  background-color: $primary-background;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+
+  .left-area {
+    .meet-logo {
+      width: 50px;
+      height: 50px;
+      margin-left: 20px;
+    }
+  }
+
+  .right-area {
+    width: 100%;
+    padding-right: 20px;
+
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+      column-gap: 15px;
+
+      li {
+        // margin: 10px 20px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      a,
+      a:visited {
+        color: #ffffff;
+      }
+      a:hover {
+        color: #00feff;
+      }
+    }
+  }
+}

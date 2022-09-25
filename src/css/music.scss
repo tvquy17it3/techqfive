@@ -1,0 +1,277 @@
+@import './color.scss';
+$bg-music-default: '../assets/images/maxresdefault.jpg';
+
+.sesion-container {
+  width: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+body {
+  background-color: $bg-body-color;
+  overflow: hidden;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.player {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.player .icon-pause {
+  display: none;
+}
+
+.player.playing .icon-pause {
+  display: inline-block;
+}
+
+.player.playing .icon-play {
+  display: none;
+}
+
+.dashboard {
+  padding: 16px 16px 14px;
+  background-color: $white-color;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 480px;
+  border-bottom: 1px solid #ebebeb;
+  height: 180px;
+  z-index: 2;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+header h4 {
+  color: $red55-color;
+  font-size: 12px;
+}
+
+header h2 {
+  color: $black333;
+  font-size: 20px;
+}
+
+/* CD */
+.cd {
+  display: flex;
+  margin: auto;
+  width: 200px;
+}
+
+.cd-thumb {
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 50%;
+  background-color: $black333;
+  background-size: cover;
+  margin: auto;
+  background-image: url($bg-music-default);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cd-thumb.playing {
+    animation: Cd-thumb-spin infinite 20s linear;
+  }
+}
+
+@keyframes Cd-thumb-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* CONTROL */
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 18px 0 8px 0;
+}
+
+.control .btn {
+  color: $black666;
+  padding: 18px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.control .btn.active {
+  color: $red55-color;
+}
+
+.control .btn-toggle-play {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: $white-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $red55-color;
+  background-size: 185%;
+}
+
+.time-progress {
+  display: flex;
+  column-gap: 5px;
+
+  .time, .progress {
+    margin: auto;
+    font-size: 12px;
+  }
+}
+
+.progress {
+  width: 85%;
+  -webkit-appearance: none;
+  height: 6px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 6px;
+  background-color: $red55-color;
+  cursor: pointer;
+}
+
+
+/* PLAYLIST */
+.playlist {
+  padding: 12px;
+  overflow-y: auto;
+  height: calc(100vh - 180px);
+  z-index: 2;
+}
+
+.song {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  background-color: $white-color;
+  padding: 8px 16px;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  min-height: 65px;
+  cursor: pointer;
+}
+
+.song.active {
+  background-color: $red55-color;
+}
+
+.song:active {
+  opacity: 0.8;
+}
+
+.song.active .option,
+.song.active .author,
+.song.active .title {
+  color: $white-color;
+}
+
+.song .thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-size: cover;
+  margin: 0 8px;
+}
+
+.song .body {
+  flex: 1;
+  padding: 0 16px;
+}
+
+.song .title {
+  font-size: 18px;
+  color: $black333;
+  margin-bottom: 3px;
+}
+
+.song .author {
+  font-size: 12px;
+  color: $grey999-color;
+}
+
+.song .option {
+  padding: 16px 8px;
+  color: $grey999-color;
+  font-size: 18px;
+}
+
+.thumb {
+  background-image: url($bg-music-default)
+}
+
+$particleSize: 2vmin;
+$animationDuration: 6s;
+$amount: 50;
+
+.background-two span {
+  width: $particleSize;
+  height: $particleSize;
+  border-radius: $particleSize;
+  backface-visibility: hidden;
+  position: absolute;
+  animation-name: move;
+  animation-duration: $animationDuration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  $colors: (
+    #aa45ad,
+    #353268,
+    #cc3a3a,
+    #518053,
+    #b8686c
+  );
+  @for $i from 1 through $amount {
+    &:nth-child(#{$i}) {
+      color: nth($colors, random(length($colors)));
+      top: random(100) * 1%;
+      left: random(100) * 1%;
+      animation-duration: (random($animationDuration * 10) / 10) * 1s + 10s;
+      animation-delay: random(($animationDuration + 10s) * 10) / 10 * -1s;
+      transform-origin: (random(50) - 25) * 1vw (random(50) - 25) * 1vh;
+      $blurRadius: (random() + 0.5) * $particleSize * 0.5;
+      $x: if(random() > 0.5, -1, 1);
+      box-shadow: ($particleSize * 2 * $x) 0 $blurRadius currentColor;
+    }
+  }
+}
+
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
